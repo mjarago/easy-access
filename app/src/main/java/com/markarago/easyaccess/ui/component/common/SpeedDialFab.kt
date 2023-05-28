@@ -1,4 +1,4 @@
-package com.markarago.easyaccess.ui.component
+package com.markarago.easyaccess.ui.component.common
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FiniteAnimationSpec
@@ -23,14 +23,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.markarago.easyaccess.ui.model.Action
-import com.markarago.easyaccess.ui.model.ShortcutType
 
 @Composable
 fun SpeedDialFAB(
     isExpanded: Boolean,
     actions: List<Action>,
     toggle: () -> Unit,
-    onActionClick: (ShortcutType) -> Unit,
+    onItemClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -60,7 +59,10 @@ fun SpeedDialFAB(
                         0.dp,
                         0.dp
                     ),
-                    onClick = { onActionClick(action.type) }
+                    onClick = {
+                        onItemClick(action.type.name)
+                        toggle()
+                    }
                 ) {
                     Icon(
                         action.icon,

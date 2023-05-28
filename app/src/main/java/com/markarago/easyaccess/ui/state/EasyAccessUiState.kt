@@ -37,7 +37,7 @@ class EasyAccessUiState {
                 name = "App",
                 contentDescription = "Add Application",
                 icon = Icons.Outlined.Face,
-                type = ShortcutType.Phone
+                type = ShortcutType.App
             ),
             Action(
                 name = "Phone",
@@ -55,7 +55,7 @@ class EasyAccessUiState {
                 name = "Website",
                 contentDescription = "Add Website URL",
                 icon = Icons.Outlined.Add,
-                type = ShortcutType.Phone
+                type = ShortcutType.Website
             )
         )
     }
