@@ -2,7 +2,7 @@ package com.markarago.easyaccess.ui.model
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
-data class Action(
+data class FabAction(
     val name: String,
     val contentDescription: String? = null,
     val icon: ImageVector,

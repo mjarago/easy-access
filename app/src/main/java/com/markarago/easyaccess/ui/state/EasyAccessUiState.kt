@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import com.markarago.easyaccess.ui.FabState.*
-import com.markarago.easyaccess.ui.model.Action
+import com.markarago.easyaccess.ui.model.FabAction
 import com.markarago.easyaccess.ui.model.ShortcutType
 
 @Composable
@@ -31,27 +31,27 @@ class EasyAccessUiState {
 
     fun isExpanded() = fabState.value == Expanded
 
-    fun getActions(): List<Action> {
+    fun getActions(): List<FabAction> {
         return listOf(
-            Action(
+            FabAction(
                 name = "App",
                 contentDescription = "Add Application",
                 icon = Icons.Outlined.Face,
                 type = ShortcutType.App
             ),
-            Action(
+            FabAction(
                 name = "Phone",
                 contentDescription = "Add Phone",
                 icon = Icons.Outlined.Phone,
                 type = ShortcutType.Phone
             ),
-            Action(
+            FabAction(
                 name = "Email",
                 contentDescription = "Add email contact ",
                 icon = Icons.Outlined.Email,
                 type = ShortcutType.Email
             ),
-            Action(
+            FabAction(
                 name = "Website",
                 contentDescription = "Add Website URL",
                 icon = Icons.Outlined.Add,

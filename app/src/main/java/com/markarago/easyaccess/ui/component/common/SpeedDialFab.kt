@@ -22,12 +22,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.markarago.easyaccess.ui.model.Action
+import com.markarago.easyaccess.ui.model.FabAction
 
 @Composable
 fun SpeedDialFAB(
     isExpanded: Boolean,
-    actions: List<Action>,
+    fabActions: List<FabAction>,
     toggle: () -> Unit,
     onItemClick: (String) -> Unit,
     modifier: Modifier = Modifier
@@ -37,7 +37,7 @@ fun SpeedDialFAB(
         verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Bottom),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        actions.forEachIndexed { index, action ->
+        fabActions.forEachIndexed { index, action ->
             val animationInSpecIntOffset: FiniteAnimationSpec<IntOffset> =
                 tween(delayMillis = 20 * (5 - index))
             val animationInSpecFloat: FiniteAnimationSpec<Float> =

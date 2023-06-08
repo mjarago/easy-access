@@ -32,7 +32,7 @@ fun MainScreen(
         floatingActionButton = {
             SpeedDialFAB(
                 isExpanded = uiState.isExpanded(),
-                actions = uiState.getActions(),
+                fabActions = uiState.getActions(),
                 toggle = uiState::toggle,
                 onItemClick = onFabItemClick
             )

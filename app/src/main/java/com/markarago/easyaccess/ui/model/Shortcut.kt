@@ -9,13 +9,3 @@ data class Shortcut(
     val icon: Drawable?,
     val shortcutType: ShortcutType = ShortcutType.App
 )
-
-sealed interface MainScreenViewState {
-
-    object LoadShortcuts: MainScreenViewState
-
-    data class Error(val error: Throwable? = null): MainScreenViewState
-
-    data class Success(val data: List<Shortcut>): MainScreenViewState
-
-}

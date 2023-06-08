@@ -3,6 +3,7 @@ package com.markarago.easyaccess
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -16,22 +17,28 @@ import com.markarago.easyaccess.ui.component.screen.MainScreen
 import com.markarago.easyaccess.ui.component.screen.PhoneScreen
 import com.markarago.easyaccess.ui.component.screen.WebsiteScreen
 import com.markarago.easyaccess.ui.model.ShortcutType
+import com.markarago.easyaccess.ui.model.ShortcutViewIntent
+import com.markarago.easyaccess.ui.model.ShortcutViewModel
 import com.markarago.easyaccess.ui.state.EasyAccessUiState
 import com.markarago.easyaccess.ui.state.rememberEasyAccessUiState
 import com.markarago.easyaccess.ui.theme.EasyAccessTheme
 
 class MainActivity : ComponentActivity() {
 
+    private val mainScreenViewModel by viewModels<MainScreenViewModel> { EasyAccessViewModelFactory }
+
+    private val shortcutViewModel by viewModels<ShortcutViewModel> { EasyAccessViewModelFactory }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val uiState = rememberEasyAccessUiState()
-            val mainScreenViewModel = MainScreenViewModel()
             val navController = rememberNavController()
             EasyAccessTheme {
                 NavGraph(
                     uiState = uiState,
                     mainScreenViewModel = mainScreenViewModel,
+                    shortcutViewModel = shortcutViewModel,
                     navController = navController
                 )
             }
@@ -42,6 +49,7 @@ class MainActivity : ComponentActivity() {
     fun NavGraph(
         uiState: EasyAccessUiState,
         mainScreenViewModel: MainScreenViewModel,
+        shortcutViewModel: ShortcutViewModel,
         navController: NavHostController
     ) {
         NavHost(
@@ -56,7 +64,10 @@ class MainActivity : ComponentActivity() {
                 )
             }
             composable(ShortcutType.App.name) {
-                AppScreen()
+                onShortcutIntent(ShortcutViewIntent.LoadApps)
+                AppScreen(
+                    shortcutViewModel = shortcutViewModel
+                )
             }
             composable(ShortcutType.Email.name) {
                 EmailScreen()
@@ -69,5 +80,9 @@ class MainActivity : ComponentActivity() {
             }
 
         }
+    }
+
+    fun onShortcutIntent(intent: ShortcutViewIntent) {
+        shortcutViewModel.onIntent(intent)
     }
 }
